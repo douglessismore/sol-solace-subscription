@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sol Solace — Subscription Idea, Honestly</title>
+<meta name="description" content="A grounded look at whether a membership model makes sense for Sol Solace, with realistic numbers and three alternatives." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f2ea;
+    --cream-2: #efe7d8;
+    --ink: #2a2522;
+    --ink-soft: #4a423d;
+    --muted: #7d736b;
+    --line: #e3d9c7;
+    --sage: #5e7355;
+    --sage-soft: #e8efde;
+    --terra: #b85d3c;
+    --terra-soft: #f4e1d6;
+    --gold: #b88a3e;
+    --gold-soft: #f4ead0;
+    --paper: #fffdf8;
+    --shadow: 0 1px 2px rgba(42, 37, 34, 0.04), 0 8px 24px rgba(42, 37, 34, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .narrow { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 0 0 1rem; font-weight: 500; }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin: 0 0 0.75rem; }
+  h3 { font-size: 1.3rem; margin: 0 0 0.5rem; }
+  h4 { font-size: 1.1rem; margin: 0 0 0.4rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0; }
+
+  p { margin: 0 0 1em; color: var(--ink-soft); }
+  strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--terra); text-decoration: none; border-bottom: 1px solid rgba(184, 93, 60, 0.3); }
+  a:hover { border-bottom-color: var(--terra); }
+
+  /* Hero */
+  header.hero {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--cream-2) 0%, var(--cream) 100%);
+  }
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    color: var(--terra);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+  .lede {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 1.4rem 0 0;
+    font-style: italic;
+  }
+  .byline {
+    margin-top: 1.6rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* Section */
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  section .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--terra);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 2.2rem;
+    box-shadow: var(--shadow);
+  }
+  .toc h4 {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin: 0 0 0.8rem;
+    font-weight: 600;
+  }
+  .toc ol { margin: 0; padding-left: 1.4rem; color: var(--ink-soft); }
+  .toc li { padding: 3px 0; font-size: 0.95rem; }
+  .toc a { color: var(--ink-soft); border-bottom: none; }
+  .toc a:hover { color: var(--terra); }
+
+  /* Cards & callouts */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin: 16px 0;
+    box-shadow: var(--shadow);
+  }
+  .card.tight { padding: 16px 20px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .callout {
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 18px 0;
+    border-left: 3px solid;
+  }
+  .callout .label {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  .callout p { margin-bottom: 0.5em; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout.concern { background: var(--terra-soft); border-color: var(--terra); }
+  .callout.concern .label { color: var(--terra); }
+  .callout.good { background: var(--sage-soft); border-color: var(--sage); }
+  .callout.good .label { color: var(--sage); }
+  .callout.note { background: var(--gold-soft); border-color: var(--gold); }
+  .callout.note .label { color: var(--gold); }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 18px;
+  }
+  .stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    color: var(--ink);
+    line-height: 1.1;
+    font-weight: 500;
+  }
+  .stat .num .small { font-size: 1.1rem; color: var(--muted); }
+  .stat .lbl {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+  .stat .sub { font-size: 0.85rem; color: var(--ink-soft); margin-top: 4px; line-height: 1.4; }
+
+  /* Model card */
+  .model {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 26px;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .model .tag {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .model h3 { color: var(--ink); margin-bottom: 0.2rem; }
+  .model .price {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--terra);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .model .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 14px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .model .row .col h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .model .row ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .model .row li { padding: 2px 0; }
+
+  /* Scenarios */
+  .scenario {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin: 16px 0;
+  }
+  .scenario h4 {
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .scenario .math {
+    background: var(--cream-2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 12px 0 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .scenario .math .line {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .scenario .math .line .val { color: var(--ink); font-weight: 500; white-space: nowrap; }
+  .scenario .math .line.total {
+    border-top: 1px solid var(--line);
+    margin-top: 8px;
+    padding-top: 8px;
+    font-weight: 600;
+  }
+  .scenario .math .line.total .val { color: var(--sage); font-weight: 700; }
+  .scenario .math .line.total.loss .val { color: var(--terra); }
+
+  /* Steps */
+  ol.steps { counter-reset: step; list-style: none; padding: 0; margin: 24px 0; }
+  ol.steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 18px 20px 18px 64px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin: 12px 0;
+  }
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--terra);
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ol.steps li h4 { color: var(--ink); margin-bottom: 0.3rem; }
+  ol.steps li p { margin: 0; font-size: 0.95rem; }
+  ol.steps li .when {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sage);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  /* Question list */
+  ul.qlist { padding: 0; list-style: none; margin: 16px 0; }
+  ul.qlist li {
+    padding: 14px 0 14px 30px;
+    border-top: 1px solid var(--line);
+    position: relative;
+    color: var(--ink-soft);
+  }
+  ul.qlist li:last-child { border-bottom: 1px solid var(--line); }
+  ul.qlist li::before {
+    content: "?";
+    position: absolute;
+    left: 0;
+    top: 13px;
+    color: var(--terra);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  /* Idea pills */
+  .ideas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 18px 0;
+  }
+  .idea {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .idea .price {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--sage);
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+  .idea h4 { font-size: 1rem; margin-bottom: 4px; }
+  .idea p { font-size: 0.88rem; margin: 0; line-height: 1.5; }
+
+  /* Footer */
+  footer {
+    padding: 50px 0 60px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+    background: var(--cream-2);
+  }
+  footer p { color: var(--muted); }
+
+  /* Small bits */
+  hr.soft { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    background: var(--cream-2);
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .pill.sage { background: var(--sage-soft); color: var(--sage); }
+  .pill.terra { background: var(--terra-soft); color: var(--terra); }
+  .pill.gold { background: var(--gold-soft); color: var(--gold); }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    section { padding: 44px 0; }
+    .model .row { grid-template-columns: 1fr; }
+    .model .tag { position: static; display: inline-block; margin-bottom: 8px; }
+    ol.steps li { padding: 16px 18px 16px 58px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Sol Solace — Strategy Note</div>
+    <h1>Should we try a&nbsp;subscription?</h1>
+    <p class="lede">A grounded look at the membership idea — what works about it, what to watch for, and three versions that could actually fit Sol Solace right now.</p>
+    <div class="byline">For Monica · prepared by Doug · May 2026</div>
+
+    <nav class="toc">
+      <h4>What's in here</h4>
+      <ol>
+        <li><a href="#tldr">The short version</a></li>
+        <li><a href="#state">Where the business actually is</a></li>
+        <li><a href="#reframe">The real question</a></li>
+        <li><a href="#concerns">Honest concerns with the original idea</a></li>
+        <li><a href="#models">Three versions that could work</a></li>
+        <li><a href="#math">Realistic pricing scenarios</a></li>
+        <li><a href="#smaller">Smaller-ticket ideas (the "wellness shot")</a></li>
+        <li><a href="#plan">What I'd actually do</a></li>
+        <li><a href="#questions">Open questions for us</a></li>
+      </ol>
+    </nav>
+  </div>
+</header>
+
+<section id="tldr">
+  <div class="narrow">
+    <span class="section-num">01 — The short version</span>
+    <h2>The instinct is right. The mechanism needs work.</h2>
+    <p>A subscription <em>is</em> a smart response to a soft economy and underused rooms — but the version we first sketched (lower hourly rates billed monthly) would mostly discount existing clients without bringing in new ones, and it puts the squeeze on practitioners who are already on a 50/50 split.</p>
+
+    <div class="callout good">
+      <span class="label">Recommendation</span>
+      <p><strong>Don't touch Monica's $200 rate.</strong> Instead, launch a <strong>practitioner-led "Sol Solace Circle" membership</strong> (~$140/mo, autopay for one 60-min session with any practitioner, small loyalty perks). Pair it with a <strong>community offerings tier</strong> (group sound baths, breath work, herb circles) that fills the lower-ticket gap without diluting your hourly rate. Test for 90 days with 20–25 founding members from the existing list. Re-evaluate before any move abroad.</p>
+    </div>
+
+    <p style="font-size: 0.92rem; color: var(--muted); margin-top: 1.4rem;">The rest of this page shows the math, the alternatives we considered, and a sequenced plan you can start this month.</p>
+  </div>
+</section>
+
+<section id="state">
+  <div class="narrow">
+    <span class="section-num">02 — Reality check</span>
+    <h2>Where Sol Solace actually is right now</h2>
+    <p>Numbers below combine 2024 books with what came out of the Feb 12 meeting with Michelle. Treat them as <em>directional</em> — bookkeeping is being rebuilt — but accurate enough to decide on a direction.</p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">$157.8K</div>
+        <div class="lbl">2024 gross revenue</div>
+        <div class="sub">Step up expected for 2025/26 as Monica's hours rise.</div>
+      </div>
+      <div class="stat">
+        <div class="num">$8.5K</div>
+        <div class="lbl">2024 profit</div>
+        <div class="sub">~5% margin. Very thin. Rent ate ~29% of revenue.</div>
+      </div>
+      <div class="stat">
+        <div class="num">$3,876<span class="small">/mo</span></div>
+        <div class="lbl">Studio rent</div>
+        <div class="sub">The fixed cost everything else has to clear.</div>
+      </div>
+      <div class="stat">
+        <div class="num">3 rooms</div>
+        <div class="lbl">Physical capacity</div>
+        <div class="sub">Morning to night = roughly 150+ practitioner-hours/wk possible.</div>
+      </div>
+      <div class="stat">
+        <div class="num">~20 hrs<span class="small">/wk</span></div>
+        <div class="lbl">Practitioner hours <em>combined</em></div>
+        <div class="sub">Across all 3 bodyworkers + tarot reader + apprentice. Rooms are mostly empty.</div>
+      </div>
+      <div class="stat">
+        <div class="num">$6K<span class="small">/mo</span></div>
+        <div class="lbl">Studio cut from practitioners</div>
+        <div class="sub">At 50/50 split on $150/hr practitioner sessions.</div>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <span class="label">What this means</span>
+      <p><strong>The constraint isn't supply, it's demand.</strong> You have 3 rooms and 5 people who can work in them, and most hours are empty. That changes the subscription math significantly: <em>every additional booked hour from a member is almost pure upside</em>, because the room and practitioner are already there.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reframe">
+  <div class="narrow">
+    <span class="section-num">03 — The real question</span>
+    <h2>What are we actually trying to solve?</h2>
+    <p>The brainstorm started with: "clients are losing jobs — should we lower prices via a subscription?" That's one framing. But after the finance meeting and looking at the numbers, there are really <strong>three</strong> separate problems tangled together:</p>
+
+    <div class="card">
+      <h4>1. Short-term — fill the empty rooms</h4>
+      <p style="margin: 0;">Practitioners are doing ~20 combined hours/week. There's room for 2–3× that without hiring anyone new. A membership that drives regular bookings to practitioners is the cleanest fix.</p>
+    </div>
+    <div class="card">
+      <h4>2. Medium-term — retain clients during a soft economy</h4>
+      <p style="margin: 0;">Some clients can't justify $200 every visit right now. They need either a lower-ticket entry point (community offerings) or a commitment device that makes regular care feel manageable (autopay membership). <em>Not</em> the same as discounting Monica's hour.</p>
+    </div>
+    <div class="card">
+      <h4>3. Long-term — what survives the move to Mexico</h4>
+      <p style="margin: 0;">Any subscription you build now has to either (a) keep running with the existing practitioners once you're not on-site, or (b) wind down cleanly. Michelle's bigger point — Monica's highest-value work is teaching/retreats/her own brand, not middle-management — also applies here. Don't build something that <em>requires</em> Monica to be in the studio.</p>
+    </div>
+
+    <p style="margin-top: 1.4rem;">The subscription idea, done right, can address (1) and (2) directly, and be designed to not block (3). Done wrong, it locks Monica into more management at exactly the time she should be doing less.</p>
+  </div>
+</section>
+
+<section id="concerns">
+  <div class="narrow">
+    <span class="section-num">04 — Pushing back</span>
+    <h2>Concerns with the original framing</h2>
+    <p>Worth saying out loud before we design around them:</p>
+
+    <div class="callout concern">
+      <span class="label">Concern 1 · Pricing</span>
+      <p><strong>"$150/mo for what's normally $200" trains clients to expect a discount.</strong> Once you anchor the price down, raising it back later feels like a hike, not a return to normal. Premium positioning is hard to win back. The fix: bundle <em>added value</em> instead of a lower headline price.</p>
+    </div>
+
+    <div class="callout concern">
+      <span class="label">Concern 2 · Cashflow vs affordability</span>
+      <p><strong>Clients who can't afford $200 occasionally usually can't afford $150 every month either.</strong> Recurring billing is often <em>harder</em> on a tight budget than occasional splurges. The subscription helps the <em>studio's</em> cashflow predictability — but it may not actually rescue the clients losing their jobs. That's a different intervention (sliding scale awareness, community sessions, gift cards from friends/family).</p>
+    </div>
+
+    <div class="callout concern">
+      <span class="label">Concern 3 · Practitioner economics</span>
+      <p><strong>Practitioners are on a 50/50 split of $150/hr.</strong> If the subscription bills the client $150/mo, the per-session math at full usage is: client pays $150 → practitioner gets $75 → studio gets $75. That's the <em>existing</em> rate, not a discount. But if you discount the membership to, say, $120/mo, someone has to absorb that $30 — either the practitioner takes less per session, or the studio's cut shrinks. Worth deciding in advance.</p>
+    </div>
+
+    <div class="callout concern">
+      <span class="label">Concern 4 · The sliding-scale clue</span>
+      <p><strong>You already offer sliding-scale 30-min sessions and clients aren't using them.</strong> That's a signal worth paying attention to. If price was the barrier, sliding scale would be packed. It probably isn't packed because (a) people don't know about it, (b) there's stigma in asking, or (c) the format isn't what they want. A subscription has the same potential failure modes if it isn't positioned and communicated carefully.</p>
+    </div>
+
+    <div class="callout concern">
+      <span class="label">Concern 5 · Move-abroad mismatch</span>
+      <p><strong>A subscription you sell in 2026 implicitly promises continuity in 2027.</strong> If you're moving in 12–18 months, you owe members a clean answer up front: does the membership survive without Monica in the studio? Run with practitioners only? Convert to digital workshops? Refund and wind down? Pick before you sell.</p>
+    </div>
+  </div>
+</section>
+
+<section id="models">
+  <div class="narrow">
+    <span class="section-num">05 — Three models</span>
+    <h2>Versions that could actually fit</h2>
+    <p>Three structures, ordered roughly by how much they protect the premium positioning. Pick one — or layer two if you want both a "regular care" tier and a "community" tier.</p>
+
+    <div class="model">
+      <span class="tag">Recommended</span>
+      <h3>A. Sol Solace Circle — Practitioner Autopay</h3>
+      <div class="price">$140–150/month · with any practitioner (not Monica)</div>
+      <p>One 60-min session per month with one of the practitioners, billed automatically. Small loyalty perks — 10% off retail, free monthly community sound bath, priority booking. Session rolls over up to 2 months so missing one isn't a loss.</p>
+      <div class="row">
+        <div class="col">
+          <h4>What it does</h4>
+          <ul>
+            <li>Fills practitioner hours (the underused capacity)</li>
+            <li>Predictable monthly revenue, low risk</li>
+            <li>Keeps Monica's $200 rate fully intact</li>
+            <li>Survives the move — practitioners can keep running it</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Tradeoffs</h4>
+          <ul>
+            <li>Modest revenue per member vs full premium tier</li>
+            <li>Needs practitioner buy-in on rollover policy</li>
+            <li>Requires clear differentiation from Monica's tier</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="model">
+      <span class="tag">Higher upside, more risk</span>
+      <h3>B. Sanctuary Tier — Premium Bundle</h3>
+      <div class="price">$295–350/month · with Monica or senior practitioner</div>
+      <p>For your top 15–25 clients. Includes one 90-min session/month with Monica or a senior practitioner, plus a quarterly add-on (limpia, sound bath, tarot reading with Tivra), plus 15% off everything else. <em>Costs more</em> than booking ad-hoc — the value is in the priority, the relationship, and the curated extras, not a discount.</p>
+      <div class="row">
+        <div class="col">
+          <h4>What it does</h4>
+          <ul>
+            <li>Premium <em>positioning</em> — exclusivity, not discount</li>
+            <li>Locks in deep relationships with best clients</li>
+            <li>High revenue per member ($3.5K–4K/yr each)</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Tradeoffs</h4>
+          <ul>
+            <li>Demands Monica's time at the top tier — opposite of the "less middle-management" advice</li>
+            <li>Doesn't really help cost-strapped clients</li>
+            <li>Hard to fulfill once moved abroad unless you replace Monica's slot with retreats/virtual</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="model">
+      <span class="tag">Complement, not replacement</span>
+      <h3>C. Community Circle — Group Offerings</h3>
+      <div class="price">$60–85/month · group sessions only, no 1:1</div>
+      <p>Unlimited (or 2/mo) group offerings: sound baths, breath work, herb circles, group limpia ceremonies. Capacity of 8–12 per session. Lower price point creates an entry that doesn't compete with the $200 hour. Builds community and a top-of-funnel for higher-ticket services.</p>
+      <div class="row">
+        <div class="col">
+          <h4>What it does</h4>
+          <ul>
+            <li>Captures clients who genuinely can't afford 1:1 right now</li>
+            <li>Margins are great — one practitioner, many people</li>
+            <li>Builds the community/teaching muscle Monica wants for retreats</li>
+            <li>Doesn't dilute any individual session price</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Tradeoffs</h4>
+          <ul>
+            <li>Requires actually scheduling 2–4 group offerings/month</li>
+            <li>Needs a practitioner who likes leading groups</li>
+            <li>Marketing lift — different audience than 1:1 clients</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="soft" />
+    <div class="callout good">
+      <span class="label">My pick</span>
+      <p><strong>A + C, layered.</strong> Circle ($140) for regulars who want predictable 1:1 care. Community ($75) for people who want connection at a lower price. Skip Sanctuary (B) for now — it pulls Monica deeper into hours that her teaching/retreat ambition wants her out of.</p>
+    </div>
+  </div>
+</section>
+
+<section id="math">
+  <div class="narrow">
+    <span class="section-num">06 — Realistic math</span>
+    <h2>What the numbers could look like</h2>
+    <p>All numbers below assume practitioner sessions only (no Monica's time), 50/50 split, and conservative usage. The point isn't to predict exactly — it's to bracket the range.</p>
+
+    <div class="scenario">
+      <h4>Conservative — 20 founding Circle members ($140/mo)</h4>
+      <p>You launch quietly to your email list and 20 existing regulars sign up. Most would have come anyway, so a chunk of this is cannibalization of full-price visits.</p>
+      <div class="math">
+        <div class="line"><span>Monthly recurring revenue</span><span class="val">$2,800</span></div>
+        <div class="line"><span>Annualized</span><span class="val">$33,600</span></div>
+        <div class="line"><span>Less: practitioner payouts (assume 80% session usage)</span><span class="val">–$13,440</span></div>
+        <div class="line"><span>Less: ~$10 cannibalization vs $150 walk-in price</span><span class="val">–$1,920</span></div>
+        <div class="line total"><span>Net annual lift to studio</span><span class="val">~$18,000</span></div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h4>Realistic — 35 Circle + 30 Community members</h4>
+      <p>Circle ($140) + Community Tier ($75) running in parallel. Half of Community members are new to the studio. One group offering per week, average 8 attendees.</p>
+      <div class="math">
+        <div class="line"><span>Circle MRR (35 × $140)</span><span class="val">$4,900</span></div>
+        <div class="line"><span>Community MRR (30 × $75)</span><span class="val">$2,250</span></div>
+        <div class="line"><span>Total MRR</span><span class="val">$7,150</span></div>
+        <div class="line"><span>Annualized</span><span class="val">$85,800</span></div>
+        <div class="line"><span>Less: practitioner payouts on Circle (~80% usage)</span><span class="val">–$23,520</span></div>
+        <div class="line"><span>Less: group facilitator pay (~$200/group × 4/mo)</span><span class="val">–$9,600</span></div>
+        <div class="line total"><span>Net annual lift to studio</span><span class="val">~$52,700</span></div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h4>Stretch — 60 Circle + 60 Community (12 months in)</h4>
+      <p>Word of mouth has done its job. You're at meaningful penetration of your couple-thousand-person email list. You may need a fourth practitioner or to add hours.</p>
+      <div class="math">
+        <div class="line"><span>Circle MRR (60 × $140)</span><span class="val">$8,400</span></div>
+        <div class="line"><span>Community MRR (60 × $75)</span><span class="val">$4,500</span></div>
+        <div class="line"><span>Total MRR</span><span class="val">$12,900</span></div>
+        <div class="line"><span>Annualized</span><span class="val">$154,800</span></div>
+        <div class="line"><span>Less: practitioner payouts</span><span class="val">–$40,320</span></div>
+        <div class="line"><span>Less: group facilitator pay (6/mo)</span><span class="val">–$14,400</span></div>
+        <div class="line total"><span>Net annual lift to studio</span><span class="val">~$100,000</span></div>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <span class="label">Reality check on these numbers</span>
+      <p>The stretch scenario assumes growth that may or may not happen. The realistic scenario is the one to <em>plan</em> against. Even the conservative scenario nearly doubles the 2024 profit on its own — and most importantly, it's <em>predictable</em> revenue, which changes Monica's stress profile dramatically.</p>
+    </div>
+  </div>
+</section>
+
+<section id="smaller">
+  <div class="narrow">
+    <span class="section-num">07 — The "wellness shot" question</span>
+    <h2>Lower-ticket ideas that don't degrade the hour</h2>
+    <p>Monica's right that a 30-min limpia isn't a real limpia, and that her time is worth what it's worth. But "smaller spend" doesn't have to mean "smaller version of the premium thing." Here are six options that fill the gap <em>without</em> touching the $200 hour:</p>
+
+    <div class="ideas">
+      <div class="idea">
+        <div class="price">$35–55 / person</div>
+        <h4>Group sound bath</h4>
+        <p>60 min, 8–12 people, one practitioner. Great margin, builds community, requires no new skills.</p>
+      </div>
+      <div class="idea">
+        <div class="price">$85–125 / person</div>
+        <h4>Herb workshop</h4>
+        <p>90 min, 6–10 people. Take-home tincture or salve. Hands-on, sticky, leans into the ancestral piece.</p>
+      </div>
+      <div class="idea">
+        <div class="price">$75–125 / 30 min</div>
+        <h4>Tarot reading w/ Tivra</h4>
+        <p>You already have this. Promote it as a standalone offering, not just an add-on. Featured monthly.</p>
+      </div>
+      <div class="idea">
+        <div class="price">$25–75</div>
+        <h4>Retail / apothecary</h4>
+        <p>Curated oils, herbs, candles, sound tools. Recurring revenue with no time cost. Great gift-card vehicle.</p>
+      </div>
+      <div class="idea">
+        <div class="price">$50–95 / 25 min</div>
+        <h4>"Reset" sessions</h4>
+        <p>Foot/scalp/chair massage — clearly framed as a tune-up between full sessions, not a substitute for one.</p>
+      </div>
+      <div class="idea">
+        <div class="price">$65–95 / person</div>
+        <h4>Community limpia circle</h4>
+        <p>60 min group format — ceremonial, intentional, not a watered-down 1:1. Could be quarterly, ticketed.</p>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <span class="label">Bonus channel — corporate / HSA / gift cards</span>
+      <p>Three angles that are pure upside in a soft consumer economy: (1) <strong>HSA/FSA eligibility</strong> for massage therapy (where the client has a doctor's recommendation) — money already earmarked for wellness. (2) <strong>Local corporate wellness</strong> — small Austin companies looking for benefits; even one company at a $500/mo retainer is meaningful. (3) <strong>Gift cards</strong> heavily marketed in Nov/Dec — captures the "I want to give a luxury thing" budget from people other than the client themselves.</p>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="narrow">
+    <span class="section-num">08 — A sequenced plan</span>
+    <h2>What I'd actually do</h2>
+    <p>A 90-day path that doesn't require Monica to overhaul anything. The goal is to <em>test</em>, learn, and only commit fully if the numbers support it.</p>
+
+    <ol class="steps">
+      <li>
+        <div class="when">Weeks 1–2 · Decide & price</div>
+        <h4>Pick the structure and lock the numbers</h4>
+        <p>Confirm Circle pricing ($140 vs $150), decide on Community tier ($75 vs $85), decide on rollover policy (2 months feels right), align with practitioners on session economics, write a one-pager for clients.</p>
+      </li>
+      <li>
+        <div class="when">Weeks 2–3 · Set up the rails</div>
+        <h4>Square / Stripe recurring + member tracking</h4>
+        <p>Square supports subscriptions natively. Or use Stripe Billing if you want more control. Add a member tag/code so Michelle's bookkeeping can pull membership revenue separately from walk-in. (Worth flagging to Deb so she sets up the chart of accounts to support it from the start.)</p>
+      </li>
+      <li>
+        <div class="when">Week 3 · Soft launch</div>
+        <h4>Invite 20–25 founding members from the email list</h4>
+        <p>Personal email or DM to your most-engaged regulars. Frame it as a founding cohort — locked-in pricing, gratitude for early support. Cap it. Scarcity is real here. Goal: 20 paid signups in 2 weeks.</p>
+      </li>
+      <li>
+        <div class="when">Weeks 4–6 · Run it & listen</div>
+        <h4>First month of fulfillment</h4>
+        <p>Track: who books, who doesn't, what they ask about, what they complain about, whether practitioners are getting overwhelmed or under-booked. Schedule one group offering as a "perk" for members to see how attendance feels.</p>
+      </li>
+      <li>
+        <div class="when">Week 8 · Open it up</div>
+        <h4>Public launch to the full list</h4>
+        <p>Email + social. Use testimonials from the founding cohort. Layer in Community tier here if Circle is going well. Target another 15–20 Circle members + first 20 Community members.</p>
+      </li>
+      <li>
+        <div class="when">Week 12 · Review with Michelle / Deb</div>
+        <h4>Look at the actual numbers</h4>
+        <p>By then you'll have 2 full months of membership data in QuickBooks. Compare to projections, decide whether to keep, adjust, or wind down. This also informs the move-abroad timing — do members stick if you tell them Monica is leaving?</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="questions">
+  <div class="narrow">
+    <span class="section-num">09 — Open questions</span>
+    <h2>Things we still need to figure out</h2>
+    <p>Honest list of things this page can't answer without input from Monica, the practitioners, or Michelle:</p>
+
+    <ul class="qlist">
+      <li><strong>Practitioner buy-in.</strong> Are they up for the rollover/scheduling implications? Do they want to be on autopay roster, or stay walk-in only?</li>
+      <li><strong>Actual capacity per practitioner.</strong> How many more hours/wk can each one realistically take on? This sets the ceiling on Circle membership.</li>
+      <li><strong>Move timing.</strong> Best guess on departure window? 12 months? 18? 24? Changes how aggressively you should sell long-term commitments.</li>
+      <li><strong>Tivra's interest.</strong> Would Tivra do a "tarot membership" mini-product, or want to be part of Circle as one of the practitioners?</li>
+      <li><strong>Sliding-scale data.</strong> Why aren't people using the current sliding scale offering? Quick survey of regulars could de-risk the whole subscription launch.</li>
+      <li><strong>Email list health.</strong> Of the ~2,000 subscribers, how many opened the last 3 emails? That's the realistic addressable audience for a launch.</li>
+      <li><strong>Square vs Stripe.</strong> Square's subscription feature exists but is basic. If you want better tracking and member portals, Stripe + a tiny landing page is worth the small lift.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="narrow">
+    <p>Draft strategy note · not financial advice · numbers will need to be re-grounded once Deb has the books current.</p>
+    <p style="margin-top: 0.4rem; font-size: 0.78rem;">If anything here lands wrong, that's the point of a draft — push back on it, and we'll redo the math together.</p>
+  </div>
+</footer>
+
+</body>
+</html>
