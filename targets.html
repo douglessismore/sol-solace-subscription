@@ -77,18 +77,19 @@
   <div class="wrap">
 
     <h2>The matrix</h2>
-    <p>Each cell shows the <strong>practitioner hours/week (combined across all)</strong> needed to hit the target — given that row's Monica hours and that column's product line tier.</p>
+    <p>Twelve combinations of Monica's hours × product tier. <strong>Every cell answers the same question:</strong> "given this row's Monica hours and this column's product revenue, <strong>how many practitioner hours/week (combined across all of them) are needed to hit the take-home target?</strong>"</p>
+    <p style="font-size: 0.92rem; color: var(--muted); font-style: italic;">Example: if Monica works <strong>20 hrs/wk</strong> and products bring in <strong>$127K/yr (realistic tier)</strong>, the cell shows how many additional practitioner hours/wk are needed on top of that to clear the target. A "0" means Monica + products alone already clear it — the "cushion" below shows by how much.</p>
 
     <div class="matrix-frame">
-      <h4>Required practitioner hours/week to hit target</h4>
+      <h4>How many practitioner hrs/wk to hit target?</h4>
       <div class="mf-sub" id="matrix-sub">Target $150K · full studio overhead · no membership</div>
 
       <div class="matrix" id="matrix">
-        <div class="matrix-cell header"></div>
-        <div class="matrix-cell header">No products</div>
-        <div class="matrix-cell header">Conservative<br />~$52K</div>
-        <div class="matrix-cell header">Realistic<br />~$127K</div>
-        <div class="matrix-cell header">Stretch<br />~$250K</div>
+        <div class="matrix-cell header" style="font-size: 0.62rem;">If Monica works ↓<br />&amp; products = →</div>
+        <div class="matrix-cell header">No products<br />($0)</div>
+        <div class="matrix-cell header">Conservative<br />(+$52K)</div>
+        <div class="matrix-cell header">Realistic<br />(+$127K)</div>
+        <div class="matrix-cell header">Stretch<br />(+$250K)</div>
 
         <div class="matrix-cell row-label">Monica: 0 hrs/wk<small>no bodywork</small></div>
         <div class="matrix-cell cell-value" data-monica="0" data-products="0"></div>
@@ -334,11 +335,11 @@
           monicaHrs, practHrs: 0, products,
           membership: state.membership, overhead: state.overhead
         }).takehome - state.target);
-        cell.innerHTML = '<div class="mv-num">✓</div><div class="mv-unit">already exceeds</div><div class="mv-per">by ' + fmt(cushion) + '</div>';
+        cell.innerHTML = '<div class="mv-num">0</div><div class="mv-unit">practitioner hrs/wk needed</div><div class="mv-per">✓ already over target by ' + fmt(cushion) + '</div>';
       } else {
         const rounded = Math.ceil(hrs);
         const perPract = (rounded / 3).toFixed(1);
-        cell.innerHTML = '<div class="mv-num">' + rounded + '</div><div class="mv-unit">hrs/wk combined</div><div class="mv-per">~' + perPract + ' per practitioner</div>';
+        cell.innerHTML = '<div class="mv-num">' + rounded + '</div><div class="mv-unit">practitioner hrs/wk needed</div><div class="mv-per">~' + perPract + ' hrs/wk per practitioner</div>';
       }
     });
 
