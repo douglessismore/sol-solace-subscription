@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Sol Solace — where we are</title>
+<title>Sol Solace — Strategy Summary</title>
 <meta name="robots" content="noindex, nofollow" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,9 @@
     --muted: #8a8078;
     --line: #e3d9c7;
     --sage: #5e7355;
+    --sage-deep: #45563f;
     --terra: #b85d3c;
+    --terra-deep: #8a4429;
     --gold: #b88a3e;
     --paper: #fffdf8;
   }
@@ -27,143 +29,282 @@
     background: var(--cream);
     color: var(--ink);
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 18px;
-    line-height: 1.7;
+    font-size: 17px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-  .page {
-    max-width: 620px;
-    margin: 0 auto;
-    padding: 80px 32px 100px;
-  }
+  .page { max-width: 700px; margin: 0 auto; padding: 60px 28px 80px; }
+
   h1 {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 500;
-    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    font-size: clamp(2.2rem, 5.5vw, 3rem);
     line-height: 1.1;
-    margin: 0 0 1.2rem;
-    color: var(--ink);
+    margin: 0 0 0.8rem;
     letter-spacing: -0.01em;
   }
   h2 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
     font-size: 1.5rem;
-    margin: 70px 0 16px;
-    color: var(--ink);
+    margin: 56px 0 14px;
+    letter-spacing: -0.005em;
   }
-  p {
-    margin: 0 0 1em;
-    color: var(--ink-soft);
+  p { margin: 0 0 1em; color: var(--ink-soft); }
+  strong { color: var(--ink); font-weight: 600; }
+  em { font-style: italic; }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--terra);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
   }
   .lede {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.25rem;
+    font-size: 1.18rem;
     line-height: 1.5;
     color: var(--ink-soft);
-    margin: 0 0 1rem;
-  }
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.72rem;
-    color: var(--terra);
-    font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin: 0.8rem 0 0;
   }
 
-  .paths {
-    margin: 30px 0 20px;
+  /* ====== CHART ====== */
+  .chart {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 26px 28px 22px;
+    margin: 24px 0;
+    box-shadow: 0 1px 2px rgba(42, 37, 34, 0.04), 0 8px 24px rgba(42, 37, 34, 0.05);
   }
-  .p-block {
+  .chart-title {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .chart-area {
+    position: relative;
+  }
+  .bar-row {
     display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 20px;
-    padding: 24px 0;
+    grid-template-columns: 90px 1fr;
+    gap: 14px;
+    align-items: center;
+    margin: 10px 0;
+  }
+  .bar-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 600;
+    text-align: right;
+  }
+  .bar-track {
+    height: 38px;
+    background: var(--cream-2);
+    border-radius: 5px;
+    position: relative;
+    overflow: visible;
+  }
+  .bar {
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: var(--paper);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+  }
+  .bar.short { color: var(--ink); padding-left: 10px; padding-right: 0; }
+  .bar.short::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 10px;
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .bar.fail { background: var(--terra); }
+  .bar.pass { background: var(--sage); }
+  .bar.short.fail { background: var(--terra); width: 16px !important; }
+
+  .target-line {
+    position: absolute;
+    top: -4px;
+    bottom: 22px;
+    width: 2px;
+    background: var(--ink);
+    z-index: 2;
+  }
+  .target-label {
+    position: absolute;
+    top: -22px;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: var(--ink);
+    font-weight: 600;
+    white-space: nowrap;
+    background: var(--paper);
+    padding: 0 6px;
+  }
+
+  .axis-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .axis-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--muted);
+    padding: 6px 0 0;
+    position: relative;
+  }
+  .axis-ticks span { transform: translateX(-50%); }
+  .axis-ticks span:first-child { transform: translateX(0); }
+
+  .chart-note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* ====== PATHS ====== */
+  .path {
+    padding: 22px 0;
     border-top: 1px solid var(--line);
-    align-items: start;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
-  .p-block:last-child { border-bottom: 1px solid var(--line); }
-  .p-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    line-height: 0.9;
-    font-weight: 500;
-    color: var(--terra);
-    opacity: 0.6;
+  .path:last-of-type { border-bottom: 1px solid var(--line); }
+  .path-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
-  .p-body { padding-top: 6px; }
-  .p-name {
+  .path-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     color: var(--ink);
     font-weight: 600;
     line-height: 1.1;
-    margin-bottom: 0.3rem;
   }
-  .p-what {
+  .path-name .num {
+    color: var(--terra);
+    opacity: 0.5;
+    margin-right: 8px;
+  }
+  .path-status {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .path-status.no { color: var(--terra); }
+  .path-status.yes { color: var(--sage-deep); }
+  .path-what {
     color: var(--ink-soft);
-    margin: 6px 0 8px;
+    margin: 4px 0 8px;
+    font-size: 0.97rem;
   }
-  .p-tag {
-    display: inline-block;
-    font-size: 0.78rem;
-    padding: 3px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-    margin-top: 6px;
+  .path-meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
   }
-  .p-tag.no { background: rgba(184, 93, 60, 0.12); color: var(--terra); }
-  .p-tag.yes { background: rgba(94, 115, 85, 0.14); color: var(--sage); }
+  .path-meta span strong { color: var(--ink); font-weight: 600; }
 
-  .leaning {
-    background: rgba(94, 115, 85, 0.08);
-    border-left: 3px solid var(--sage);
-    padding: 22px 26px;
-    border-radius: 8px;
-    margin: 16px 0;
+  /* ====== READS ====== */
+  .read-box {
+    background: var(--cream-2);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 18px 0;
   }
-  .leaning p:last-child { margin-bottom: 0; }
-  .leaning strong { color: var(--sage); }
+  .read-box p:last-child { margin-bottom: 0; }
 
-  ul.gut {
+  ul.q {
     list-style: none;
     padding: 0;
     margin: 16px 0;
   }
-  ul.gut li {
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
-    color: var(--ink-soft);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    line-height: 1.4;
-  }
-  ul.gut li:last-child { border-bottom: none; }
-
-  .footer {
-    margin-top: 80px;
-    padding-top: 24px;
+  ul.q li {
+    padding: 12px 0 12px 20px;
     border-top: 1px solid var(--line);
-    text-align: center;
-    font-size: 0.82rem;
-    color: var(--muted);
+    color: var(--ink-soft);
+    font-size: 0.96rem;
+    position: relative;
   }
-  .footer a {
-    color: var(--muted);
-    border-bottom: 1px dotted var(--muted);
+  ul.q li:last-child { border-bottom: 1px solid var(--line); }
+  ul.q li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--terra);
+    font-weight: 700;
+  }
+
+  .detail-links {
+    margin-top: 60px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+    justify-content: center;
+    font-size: 0.88rem;
+  }
+  .detail-links a {
+    color: var(--ink-soft);
     text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
   }
-  .footer a:hover { color: var(--ink); }
+  .detail-links a:hover { color: var(--terra); border-bottom-color: var(--terra); }
+  .detail-links .dl-label {
+    color: var(--muted);
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+  }
 
   @media (max-width: 600px) {
-    .page { padding: 50px 22px 70px; }
-    h2 { margin: 50px 0 12px; }
-    .p-block { grid-template-columns: 44px 1fr; gap: 14px; padding: 20px 0; }
-    .p-num { font-size: 2.4rem; }
-    .p-name { font-size: 1.4rem; }
+    .page { padding: 40px 20px 60px; }
+    .bar-row { grid-template-columns: 70px 1fr; gap: 10px; }
+    .axis-row { grid-template-columns: 70px 1fr; gap: 10px; }
+    .bar-name { font-size: 0.92rem; }
+    .axis-ticks { font-size: 0.64rem; }
+    .path-meta { font-size: 0.78rem; gap: 12px; }
   }
 </style>
 </head>
@@ -171,71 +312,129 @@
 
 <div class="page">
 
-  <div class="eyebrow">For Monica · May 2026</div>
-  <h1>Where we actually are.</h1>
-  <p class="lede">One page. No spreadsheets. Just the situation, the three real choices, and what I'm leaning toward — so we can talk about it.</p>
+  <div class="eyebrow">Strategy Summary · May 2026</div>
+  <h1>Sol Solace — where things stand.</h1>
+  <p class="lede">Plateaued revenue, thin margins, and a stated goal (a move abroad) the current model can't fund. Three structural paths can change that. One chart, three paths, the open questions.</p>
 
-  <h2>The honest picture</h2>
-  <p>Sol Solace has been making about the same revenue two years running. 2026 is up a little because you've been working more hours. The studio rent is the biggest single cost.</p>
-  <p>After everything is paid, what's left for our family isn't enough to also save for the move. <strong>Not failing — plateaued.</strong> And the plateau doesn't fund what's next.</p>
+  <h2>The picture</h2>
+  <p>Sol Solace did <strong>$158K</strong> in gross sales in 2024, and <strong>$158K</strong> again in 2025 — flat year over year. 2026 is on pace for roughly <strong>$190K</strong>, driven by Monica taking more hours after Doug's layoff. Profit margin sits near 5%; rent is 25–29% of revenue. The current shape doesn't generate enough take-home to also save for the planned move to Mexico.</p>
 
-  <h2>Three real choices</h2>
+  <h2>Annual take-home by path</h2>
 
-  <div class="paths">
+  <div class="chart">
+    <div class="chart-title">Projected annual take-home (after tax) · Target: $150K</div>
 
-    <div class="p-block">
-      <div class="p-num">1</div>
-      <div class="p-body">
-        <div class="p-name">Stay the course</div>
-        <p class="p-what">Keep everything as it is. Studio. Practitioners. Your current hours. Nothing changes.</p>
-        <span class="p-tag no">Move not possible</span>
+    <div class="chart-area">
+
+      <!-- Target line at $150K = 50% of $300K max -->
+      <div class="target-line" style="left: calc(50% + 0px);"></div>
+
+      <div class="bar-row">
+        <div class="bar-name">Stay</div>
+        <div class="bar-track">
+          <div class="target-label" style="left: 50%;">$150K target</div>
+          <div class="bar fail short" style="width: 8.3%;" data-label="$25K"></div>
+        </div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-name">Reshape</div>
+        <div class="bar-track">
+          <div class="bar pass" style="width: 84%;">$253K</div>
+        </div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-name">Release</div>
+        <div class="bar-track">
+          <div class="bar pass" style="width: 77%;">$232K</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="axis-row">
+      <div></div>
+      <div class="axis-ticks">
+        <span>$0</span>
+        <span>$50K</span>
+        <span>$100K</span>
+        <span>$150K</span>
+        <span>$200K</span>
+        <span>$250K</span>
+        <span>$300K</span>
       </div>
     </div>
 
-    <div class="p-block">
-      <div class="p-num">2</div>
-      <div class="p-body">
-        <div class="p-name">Reshape</div>
-        <p class="p-what">A smaller space, fewer practitioners, you do less bodywork. We start selling beautiful intentional things — candles, copal, ceremony kits — the things already in your practice.</p>
-        <span class="p-tag yes">Move becomes possible</span>
-      </div>
-    </div>
-
-    <div class="p-block">
-      <div class="p-num">3</div>
-      <div class="p-body">
-        <div class="p-name">Release</div>
-        <p class="p-what">Close the studio. You work solo from home or a small rented room. The products do a lot of the work. Brand becomes you.</p>
-        <span class="p-tag yes">Move becomes easiest</span>
-      </div>
-    </div>
-
+    <p class="chart-note">Steady-state year 2+. "Take-home" = after-tax money in the household's hands. The $150K target assumes ~$200K household need with Doug's AI consulting covering ~$50K. Numbers are directional and pending refinement against current QuickBooks data.</p>
   </div>
 
-  <h2>What I'm leaning toward</h2>
-  <div class="leaning">
-    <p><strong>Path 2.</strong> Not because the numbers are biggest — path 3 actually has more financial breathing room — but because it keeps what I think you'd grieve losing.</p>
-    <p>A space. One or two practitioners. An identity beyond just you. While still making the move real.</p>
-    <p style="font-size: 0.95rem; color: var(--muted);">You'd know better than me whether a smaller studio is meaningful to you, or whether it'd be holding onto something you've outgrown.</p>
+  <h2>The three paths, in plain terms</h2>
+
+  <div class="path">
+    <div class="path-head">
+      <div class="path-name"><span class="num">1</span>Stay the course</div>
+      <div class="path-status no">Move not possible</div>
+    </div>
+    <p class="path-what">Studio unchanged. Practitioners unchanged. Monica's hours unchanged. Revenue continues at the 2026 pace.</p>
+    <div class="path-meta">
+      <span>Revenue: <strong>$190K</strong></span>
+      <span>Take-home: <strong>$25K</strong></span>
+      <span>vs target: <strong>−$125K</strong></span>
+    </div>
   </div>
 
-  <h2>What I need from you</h2>
-  <p>Not opinions on contracts or rent. Just your gut, when you have space to sit with them:</p>
+  <div class="path">
+    <div class="path-head">
+      <div class="path-name"><span class="num">2</span>Reshape</div>
+      <div class="path-status yes">Move possible</div>
+    </div>
+    <p class="path-what">Smaller studio (one treatment room). One or two well-utilized practitioners. Monica steps back to ~12 hrs/wk of bodywork. Launch a curanderismo-rooted product line (candles, copal, ceremony kits, seasonal boxes).</p>
+    <div class="path-meta">
+      <span>Revenue: <strong>$397K</strong></span>
+      <span>Take-home: <strong>$253K</strong></span>
+      <span>vs target: <strong>+$103K</strong></span>
+    </div>
+  </div>
 
-  <ul class="gut">
-    <li>Which of the three feels most like the next version of you?</li>
-    <li>What would you grieve in path 2? In path 3?</li>
-    <li>Is your apprenticeship pulling you toward work that needs a studio at all?</li>
-    <li>Does making physical things — candles, kits, ceremony objects — feel right to put your name on?</li>
-    <li>How tired are you?</li>
+  <div class="path">
+    <div class="path-head">
+      <div class="path-name"><span class="num">3</span>Release</div>
+      <div class="path-status yes">Move easiest</div>
+    </div>
+    <p class="path-what">Close the studio. Monica works solo (~22 hrs/wk) from home or a small rented space. No practitioners. Same product line as Path 2 carries significant revenue. Brand becomes Monica, not a place.</p>
+    <div class="path-meta">
+      <span>Revenue: <strong>$347K</strong></span>
+      <span>Take-home: <strong>$232K</strong></span>
+      <span>vs target: <strong>+$82K</strong></span>
+    </div>
+  </div>
+
+  <h2>Where the math points</h2>
+  <div class="read-box">
+    <p>Both <strong>Reshape</strong> and <strong>Release</strong> clear the take-home target with room. Reshape produces slightly more total take-home and retains a physical studio + small team. Release simplifies operations, eliminates rent and management overhead, and is the cleanest fit for relocation logistics.</p>
+    <p>The deciding factors aren't financial — they're about studio identity, the team, Monica's apprenticeship direction, and what feels right to put a name on (the products question).</p>
+  </div>
+
+  <h2>Open questions</h2>
+  <ul class="q">
+    <li>Which path best matches Monica's current direction — the apprenticeship in Oaxaca, teaching/retreat ambitions, time/energy capacity?</li>
+    <li>What would be grieved letting go of: the physical studio? The practitioners? The "Sol Solace as a place" identity?</li>
+    <li>What's the move timeline window — 12 months, 18, 24? Earlier = faster decision on the studio.</li>
+    <li>Comfort level with a product line carrying Monica's name and lineage. Boundary on what's okay to commercialize.</li>
+    <li>Lease specifics — breakable, renewal date, downsize option in the current building?</li>
+    <li>Capital plan — where does $8–15K of product-launch inventory and setup come from?</li>
   </ul>
 
-  <h2>One more thing</h2>
-  <p>You've been carrying a lot. The honest answer the numbers gave me is: <strong>not as it's currently shaped, no.</strong> But there's more than one way out — and most of them are gentler on you, not harder.</p>
-  <p>None of this has to be decided this week.</p>
+  <h2>Caveats on the numbers</h2>
+  <p style="font-size: 0.93rem;">All take-home figures are directional, year-2 steady state. Product line revenue assumes the "realistic" projection tier (not conservative, not stretch). Practitioner split and tax rate assumptions are working estimates pending bookkeeping refinement. Year 1 will be lower than shown as products ramp.</p>
 
-  <div class="footer">
-    If you ever want the full picture — numbers, scenarios, math — <a href="cashflow.html">it's here</a>.
+  <div class="detail-links">
+    <span class="dl-label">Full detail and methodology</span>
+    <a href="cashflow.html">Cashflow scenarios</a>
+    <a href="targets.html">Interactive calculator</a>
+    <a href="products.html">Product line</a>
+    <a href="plan.html">Sequenced plan</a>
   </div>
 
 </div>
