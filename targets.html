@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sol Solace — Targets Calculator</title>
+<meta name="description" content="Interactive calculator: what combinations of practitioner hours, Monica's hours, and products hit the take-home target." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-row">
+    <a href="index.html" class="nav-brand">Sol Solace <small>Strategy</small></a>
+    <ul class="nav-links">
+      <li><a href="cashflow.html">Cashflow</a></li>
+      <li><a href="targets.html" class="active">Targets</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="solo.html">Solo</a></li>
+      <li><a href="plan.html">Plan</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Interactive · play with the numbers</div>
+    <h1>What combinations hit&nbsp;target?</h1>
+    <p class="lede">A matrix and calculator for the trade-offs between Monica's hours, practitioner hours, products, and studio overhead. Adjust any input — everything updates live.</p>
+  </div>
+</header>
+
+<section style="padding-top: 30px;">
+  <div class="wrap">
+
+    <h2>Set your assumptions</h2>
+    <p>These three settings drive everything below. Change them to see how the picture shifts.</p>
+
+    <div class="controls">
+      <div class="control-row">
+        <div class="control">
+          <div class="control-label">Target annual take-home <span class="ctl-current" id="target-display">$150,000</span></div>
+          <input type="range" id="target-input" min="100000" max="300000" step="10000" value="150000" />
+        </div>
+      </div>
+      <div class="control-row">
+        <div class="control">
+          <div class="control-label">Studio overhead</div>
+          <div class="btn-group" data-group="overhead">
+            <button data-value="70000" class="active">Full studio · $70K</button>
+            <button data-value="35000">Hybrid · $35K</button>
+            <button data-value="15000">Solo · $15K</button>
+          </div>
+        </div>
+      </div>
+      <div class="control-row">
+        <div class="control">
+          <div class="control-label">Membership contribution</div>
+          <div class="btn-group" data-group="membership">
+            <button data-value="0" class="active">None · $0</button>
+            <button data-value="14000">Conservative · +$14K</button>
+            <button data-value="61500">Realistic · +$61K</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+
+    <h2>The matrix</h2>
+    <p>Each cell shows the <strong>practitioner hours/week (combined across all)</strong> needed to hit the target — given that row's Monica hours and that column's product line tier.</p>
+
+    <div class="matrix-frame">
+      <h4>Required practitioner hours/week to hit target</h4>
+      <div class="mf-sub" id="matrix-sub">Target $150K · full studio overhead · no membership</div>
+
+      <div class="matrix" id="matrix">
+        <div class="matrix-cell header"></div>
+        <div class="matrix-cell header">No products</div>
+        <div class="matrix-cell header">Conservative<br />~$52K</div>
+        <div class="matrix-cell header">Realistic<br />~$127K</div>
+        <div class="matrix-cell header">Stretch<br />~$250K</div>
+
+        <div class="matrix-cell row-label">Monica: 0 hrs/wk<small>no bodywork</small></div>
+        <div class="matrix-cell cell-value" data-monica="0" data-products="0"></div>
+        <div class="matrix-cell cell-value" data-monica="0" data-products="52000"></div>
+        <div class="matrix-cell cell-value" data-monica="0" data-products="127000"></div>
+        <div class="matrix-cell cell-value" data-monica="0" data-products="250000"></div>
+
+        <div class="matrix-cell row-label">Monica: 10 hrs/wk<small>light bodywork</small></div>
+        <div class="matrix-cell cell-value" data-monica="10" data-products="0"></div>
+        <div class="matrix-cell cell-value" data-monica="10" data-products="52000"></div>
+        <div class="matrix-cell cell-value" data-monica="10" data-products="127000"></div>
+        <div class="matrix-cell cell-value" data-monica="10" data-products="250000"></div>
+
+        <div class="matrix-cell row-label">Monica: 20 hrs/wk<small>current pace</small></div>
+        <div class="matrix-cell cell-value" data-monica="20" data-products="0"></div>
+        <div class="matrix-cell cell-value" data-monica="20" data-products="52000"></div>
+        <div class="matrix-cell cell-value" data-monica="20" data-products="127000"></div>
+        <div class="matrix-cell cell-value" data-monica="20" data-products="250000"></div>
+      </div>
+
+      <div class="matrix-legend">
+        <div class="leg"><span class="leg-swatch easy"></span>Already easy (≤20 hrs/wk)</div>
+        <div class="leg"><span class="leg-swatch feasible"></span>Feasible (20–35)</div>
+        <div class="leg"><span class="leg-swatch stretch"></span>Stretch (35–55)</div>
+        <div class="leg"><span class="leg-swatch unrealistic"></span>Hard at current capacity (55+)</div>
+        <div class="leg"><span class="leg-swatch exceeds"></span>Already exceeds target</div>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <span class="label">Reality check on capacity</span>
+      <p style="margin: 0;">3 rooms × 8 working hours × 6 days = <strong>144 hrs/wk theoretical max</strong>. Realistic sustainable utilization is more like <strong>60–80 hrs/wk</strong> across all practitioners (the busy-Austin-studio benchmark). So anything under 35 hrs/wk is feasible without adding new practitioners; 35–55 is feasible with hiring or current ones increasing hours; above 55 likely needs structural growth.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+
+    <h2>Custom calculator</h2>
+    <p>Set every variable yourself. Take-home updates live.</p>
+
+    <div class="controls">
+      <div class="control-row">
+        <div class="control">
+          <div class="control-label">Monica's bodywork hours/wk <span class="ctl-current" id="calc-monica-display">15</span></div>
+          <input type="range" id="calc-monica" min="0" max="30" step="1" value="15" />
+        </div>
+      </div>
+      <div class="control-row">
+        <div class="control">
+          <div class="control-label">Practitioner hours/wk (combined) <span class="ctl-current" id="calc-pract-display">20</span></div>
+          <input type="range" id="calc-pract" min="0" max="80" step="5" value="20" />
+        </div>
+      </div>
+      <div class="control-row">
+        <div class="control">
+          <div class="control-label">Product line tier</div>
+          <div class="btn-group" data-group="calc-products">
+            <button data-value="0" class="active">None</button>
+            <button data-value="52000">Conservative</button>
+            <button data-value="127000">Realistic</button>
+            <button data-value="250000">Stretch</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-display" id="result">
+      <div class="rd-label">Annual take-home (after tax)</div>
+      <div class="rd-takehome" id="rd-takehome">$0</div>
+      <div class="rd-status" id="rd-status">Set your inputs above</div>
+      <div class="rd-row">
+        <div class="rd-stat">
+          <div class="rd-stat-label">Revenue</div>
+          <div class="rd-stat-val" id="rd-revenue">$0</div>
+        </div>
+        <div class="rd-stat">
+          <div class="rd-stat-label">Pre-tax net</div>
+          <div class="rd-stat-val" id="rd-pretax">$0</div>
+        </div>
+        <div class="rd-stat">
+          <div class="rd-stat-label">vs Target</div>
+          <div class="rd-stat-val" id="rd-vs">—</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+
+    <h2>Quick scenarios</h2>
+    <p>Click a preset to load it into the calculator above.</p>
+
+    <div class="preset-grid">
+      <div class="preset-btn" data-preset="status-quo">
+        <div class="pb-name">Status quo</div>
+        <div class="pb-desc">Monica 20 hrs · Practitioners 20 hrs · No products · Full studio</div>
+      </div>
+      <div class="preset-btn" data-preset="prac-only">
+        <div class="pb-name">Practitioners only</div>
+        <div class="pb-desc">Monica 0 hrs · Practitioners 35 hrs · Realistic products · Full studio</div>
+      </div>
+      <div class="preset-btn" data-preset="solo">
+        <div class="pb-name">Solo Monica</div>
+        <div class="pb-desc">Monica 22 hrs · Practitioners 0 hrs · Realistic products · Solo studio</div>
+      </div>
+      <div class="preset-btn" data-preset="hybrid">
+        <div class="pb-name">Hybrid (best balance)</div>
+        <div class="pb-desc">Monica 12 hrs · Practitioners 25 hrs · Realistic products · Hybrid studio</div>
+      </div>
+      <div class="preset-btn" data-preset="aggressive">
+        <div class="pb-name">All-in</div>
+        <div class="pb-desc">Monica 15 hrs · Practitioners 35 hrs · Stretch products · Hybrid studio · Realistic membership</div>
+      </div>
+      <div class="preset-btn" data-preset="bare-min">
+        <div class="pb-name">Bare minimum products</div>
+        <div class="pb-desc">Monica 15 hrs · Practitioners 25 hrs · Conservative products · Hybrid studio</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+
+    <h2>How the math works</h2>
+    <p style="font-size: 0.93rem;">Every cell and result uses the same formula. If anything in these assumptions feels off, change it and watch the numbers shift.</p>
+
+    <div class="card" style="font-size: 0.92rem;">
+      <h4>Assumptions baked in</h4>
+      <p style="margin: 0 0 0.4em;"><strong>Rate:</strong> $200/hr for both Monica and practitioners</p>
+      <p style="margin: 0 0 0.4em;"><strong>Practitioner split:</strong> 50/50 (studio keeps half of practitioner billings)</p>
+      <p style="margin: 0 0 0.4em;"><strong>Working weeks/year:</strong> 50 (accounting for vacation/holidays)</p>
+      <p style="margin: 0 0 0.4em;"><strong>Effective tax rate:</strong> 30% (rough — refine with Tammy)</p>
+      <p style="margin: 0;"><strong>Formula:</strong> Take-home = (Monica's revenue + 50% of practitioner revenue − studio overhead + products + membership) × 0.7</p>
+    </div>
+
+    <div class="callout concern">
+      <span class="label">What this doesn't model</span>
+      <p style="margin: 0 0 0.4em;">→ Year-1 ramp for products (they start at conservative for ~6–9 months before hitting realistic)</p>
+      <p style="margin: 0 0 0.4em;">→ Seasonal variation (June–August dip; holiday surge)</p>
+      <p style="margin: 0 0 0.4em;">→ Practitioner cost beyond the 50/50 split (admin, training, retention)</p>
+      <p style="margin: 0 0 0.4em;">→ Marketing/ad spend ramp (already inside the product net numbers)</p>
+      <p style="margin: 0;">→ Capital outlay for product launch ($8–15K upfront, not in operating math)</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="next-up">
+      <div class="next-lbl">The curated comparison</div>
+      <a href="cashflow.html">The cashflow scoreboard</a>
+      <p style="margin-top: 1rem; font-size: 0.93rem;">All seven scenarios laid out as cards with the same math model that powers this calculator.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="narrow">
+    <p>Interactive cashflow tool · numbers are directional · for discussion with Deb on June 2</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // ===== Configuration =====
+  const RATE = 200;
+  const WEEKS = 50;
+  const PRACT_SPLIT = 0.5; // studio keeps this portion of practitioner revenue
+  const TAX_RATE = 0.30;
+
+  // ===== State =====
+  const state = {
+    target: 150000,
+    overhead: 70000,
+    membership: 0,
+    calcMonica: 15,
+    calcPract: 20,
+    calcProducts: 0,
+  };
+
+  // ===== Math =====
+  function calcTakehome({ monicaHrs, practHrs, products, membership, overhead }) {
+    const monicaRev = monicaHrs * RATE * WEEKS;
+    const practRev = practHrs * RATE * WEEKS;
+    const studioFromPract = practRev * PRACT_SPLIT;
+    const netPretax = monicaRev + studioFromPract - overhead + products + membership;
+    const takehome = netPretax * (1 - TAX_RATE);
+    return {
+      revenue: monicaRev + practRev + products + membership,
+      pretax: netPretax,
+      takehome,
+    };
+  }
+
+  // Solve for practitioner hours to hit target
+  // target = (monicaRev + practHrs*RATE*WEEKS*PRACT_SPLIT - overhead + products + membership) * (1 - TAX_RATE)
+  function practHrsForTarget({ monicaHrs, products, membership, overhead, target }) {
+    const monicaRev = monicaHrs * RATE * WEEKS;
+    const requiredPretax = target / (1 - TAX_RATE);
+    const requiredStudioFromPract = requiredPretax - monicaRev + overhead - products - membership;
+    const requiredPractRev = requiredStudioFromPract / PRACT_SPLIT;
+    return requiredPractRev / (RATE * WEEKS);
+  }
+
+  function classifyHours(hrs) {
+    if (hrs <= 0) return 'exceeds';
+    if (hrs <= 20) return 'easy';
+    if (hrs <= 35) return 'feasible';
+    if (hrs <= 55) return 'stretch';
+    return 'unrealistic';
+  }
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  // ===== Render: Matrix =====
+  function renderMatrix() {
+    document.querySelectorAll('.matrix-cell.cell-value').forEach(cell => {
+      const monicaHrs = parseFloat(cell.dataset.monica);
+      const products = parseFloat(cell.dataset.products);
+      const hrs = practHrsForTarget({
+        monicaHrs,
+        products,
+        membership: state.membership,
+        overhead: state.overhead,
+        target: state.target,
+      });
+
+      cell.className = 'matrix-cell cell-value ' + classifyHours(hrs);
+
+      if (hrs <= 0) {
+        const cushion = Math.abs(calcTakehome({
+          monicaHrs, practHrs: 0, products,
+          membership: state.membership, overhead: state.overhead
+        }).takehome - state.target);
+        cell.innerHTML = '<div class="mv-num">✓</div><div class="mv-unit">already exceeds</div><div class="mv-per">by ' + fmt(cushion) + '</div>';
+      } else {
+        const rounded = Math.ceil(hrs);
+        const perPract = (rounded / 3).toFixed(1);
+        cell.innerHTML = '<div class="mv-num">' + rounded + '</div><div class="mv-unit">hrs/wk combined</div><div class="mv-per">~' + perPract + ' per practitioner</div>';
+      }
+    });
+
+    // Update subtitle
+    const overheadLabels = { 70000: 'full studio', 35000: 'hybrid studio', 15000: 'solo (no studio)' };
+    const membLabels = { 0: 'no membership', 14000: 'conservative membership', 61500: 'realistic membership' };
+    document.getElementById('matrix-sub').textContent =
+      'Target ' + fmt(state.target) + ' · ' + overheadLabels[state.overhead] + ' · ' + membLabels[state.membership];
+  }
+
+  // ===== Render: Calculator =====
+  function renderCalc() {
+    document.getElementById('calc-monica-display').textContent = state.calcMonica + ' hrs';
+    document.getElementById('calc-pract-display').textContent = state.calcPract + ' hrs';
+
+    const result = calcTakehome({
+      monicaHrs: state.calcMonica,
+      practHrs: state.calcPract,
+      products: state.calcProducts,
+      membership: state.membership,
+      overhead: state.overhead,
+    });
+
+    document.getElementById('rd-takehome').textContent = fmt(result.takehome);
+    document.getElementById('rd-revenue').textContent = fmt(result.revenue);
+    document.getElementById('rd-pretax').textContent = fmt(result.pretax);
+
+    const diff = result.takehome - state.target;
+    const resultBox = document.getElementById('result');
+    if (diff >= 0) {
+      resultBox.className = 'result-display pass';
+      document.getElementById('rd-status').textContent = 'Hits target with ' + fmt(diff) + ' cushion';
+      document.getElementById('rd-vs').textContent = '+' + fmt(diff);
+    } else {
+      resultBox.className = 'result-display fail';
+      document.getElementById('rd-status').textContent = fmt(Math.abs(diff)) + ' short of target';
+      document.getElementById('rd-vs').textContent = '−' + fmt(Math.abs(diff));
+    }
+  }
+
+  function renderAll() {
+    document.getElementById('target-display').textContent = fmt(state.target);
+    renderMatrix();
+    renderCalc();
+  }
+
+  // ===== Wire up controls =====
+  document.getElementById('target-input').addEventListener('input', e => {
+    state.target = parseInt(e.target.value);
+    renderAll();
+  });
+
+  // Button groups
+  document.querySelectorAll('.btn-group').forEach(group => {
+    const groupName = group.dataset.group;
+    group.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const value = parseFloat(btn.dataset.value);
+        if (groupName === 'overhead') state.overhead = value;
+        if (groupName === 'membership') state.membership = value;
+        if (groupName === 'calc-products') state.calcProducts = value;
+        renderAll();
+      });
+    });
+  });
+
+  // Calculator sliders
+  document.getElementById('calc-monica').addEventListener('input', e => {
+    state.calcMonica = parseInt(e.target.value);
+    renderCalc();
+  });
+  document.getElementById('calc-pract').addEventListener('input', e => {
+    state.calcPract = parseInt(e.target.value);
+    renderCalc();
+  });
+
+  // Presets
+  const presets = {
+    'status-quo':  { monica: 20, pract: 20, products: 0,      overhead: 70000, membership: 0 },
+    'prac-only':   { monica: 0,  pract: 35, products: 127000, overhead: 70000, membership: 0 },
+    'solo':        { monica: 22, pract: 0,  products: 127000, overhead: 15000, membership: 0 },
+    'hybrid':      { monica: 12, pract: 25, products: 127000, overhead: 35000, membership: 0 },
+    'aggressive':  { monica: 15, pract: 35, products: 250000, overhead: 35000, membership: 61500 },
+    'bare-min':    { monica: 15, pract: 25, products: 52000,  overhead: 35000, membership: 0 },
+  };
+
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const p = presets[btn.dataset.preset];
+      if (!p) return;
+      state.calcMonica = p.monica;
+      state.calcPract = p.pract;
+      state.calcProducts = p.products;
+      state.overhead = p.overhead;
+      state.membership = p.membership;
+
+      // Update UI
+      document.getElementById('calc-monica').value = p.monica;
+      document.getElementById('calc-pract').value = p.pract;
+
+      // Update button groups visually
+      function setActive(group, value) {
+        document.querySelectorAll('[data-group="' + group + '"] button').forEach(b => {
+          b.classList.toggle('active', parseFloat(b.dataset.value) === value);
+        });
+      }
+      setActive('overhead', p.overhead);
+      setActive('membership', p.membership);
+      setActive('calc-products', p.products);
+
+      renderAll();
+      // Scroll the result into view
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+
+  // Initial render
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
