@@ -3,144 +3,242 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Sol Solace — Strategy &amp; Cashflow</title>
-<meta name="description" content="What it would take to make Sol Solace work — and enable a move abroad." />
+<title>Sol Solace — where we are</title>
 <meta name="robots" content="noindex, nofollow" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<style>
+  :root {
+    --cream: #f7f2ea;
+    --cream-2: #efe7d8;
+    --ink: #2a2522;
+    --ink-soft: #4a423d;
+    --muted: #8a8078;
+    --line: #e3d9c7;
+    --sage: #5e7355;
+    --terra: #b85d3c;
+    --gold: #b88a3e;
+    --paper: #fffdf8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 80px 32px 100px;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    line-height: 1.1;
+    margin: 0 0 1.2rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin: 70px 0 16px;
+    color: var(--ink);
+  }
+  p {
+    margin: 0 0 1em;
+    color: var(--ink-soft);
+  }
+  .lede {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 1rem;
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.72rem;
+    color: var(--terra);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .paths {
+    margin: 30px 0 20px;
+  }
+  .p-block {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .p-block:last-child { border-bottom: 1px solid var(--line); }
+  .p-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    line-height: 0.9;
+    font-weight: 500;
+    color: var(--terra);
+    opacity: 0.6;
+  }
+  .p-body { padding-top: 6px; }
+  .p-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+  .p-what {
+    color: var(--ink-soft);
+    margin: 6px 0 8px;
+  }
+  .p-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .p-tag.no { background: rgba(184, 93, 60, 0.12); color: var(--terra); }
+  .p-tag.yes { background: rgba(94, 115, 85, 0.14); color: var(--sage); }
+
+  .leaning {
+    background: rgba(94, 115, 85, 0.08);
+    border-left: 3px solid var(--sage);
+    padding: 22px 26px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .leaning p:last-child { margin-bottom: 0; }
+  .leaning strong { color: var(--sage); }
+
+  ul.gut {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  ul.gut li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+  ul.gut li:last-child { border-bottom: none; }
+
+  .footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .footer a {
+    color: var(--muted);
+    border-bottom: 1px dotted var(--muted);
+    text-decoration: none;
+  }
+  .footer a:hover { color: var(--ink); }
+
+  @media (max-width: 600px) {
+    .page { padding: 50px 22px 70px; }
+    h2 { margin: 50px 0 12px; }
+    .p-block { grid-template-columns: 44px 1fr; gap: 14px; padding: 20px 0; }
+    .p-num { font-size: 2.4rem; }
+    .p-name { font-size: 1.4rem; }
+  }
+</style>
 </head>
 <body>
 
-<nav class="topnav">
-  <div class="nav-row">
-    <a href="index.html" class="nav-brand">Sol Solace <small>Strategy</small></a>
-    <ul class="nav-links">
-      <li><a href="cashflow.html">Cashflow</a></li>
-      <li><a href="targets.html">Targets</a></li>
-      <li><a href="membership.html">Membership</a></li>
-      <li><a href="products.html">Products</a></li>
-      <li><a href="solo.html">Solo</a></li>
-      <li><a href="plan.html">Plan</a></li>
-    </ul>
-  </div>
-</nav>
+<div class="page">
 
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Strategy &amp; cashflow · May 2026</div>
-    <h1>What it would actually take.</h1>
-    <p class="lede">Sol Solace at $158K/yr two years running, $190K trending for 2026. Here's what changes — and which combinations of moves would actually clear the bar to enable a move abroad.</p>
-  </div>
-</header>
+  <div class="eyebrow">For Monica · May 2026</div>
+  <h1>Where we actually are.</h1>
+  <p class="lede">One page. No spreadsheets. Just the situation, the three real choices, and what I'm leaning toward — so we can talk about it.</p>
 
-<section style="padding-top: 20px;">
-  <div class="wrap">
+  <h2>The honest picture</h2>
+  <p>Sol Solace has been making about the same revenue two years running. 2026 is up a little because you've been working more hours. The studio rent is the biggest single cost.</p>
+  <p>After everything is paid, what's left for our family isn't enough to also save for the move. <strong>Not failing — plateaued.</strong> And the plateau doesn't fund what's next.</p>
 
-    <div class="callout good">
-      <span class="label">The short version</span>
-      <p style="margin: 0 0 0.5em;"><strong>Status quo doesn't fund the move</strong> — even with the 2026 trend. Takes-home lands around $25K, against a ~$150K target.</p>
-      <p style="margin: 0 0 0.5em;"><strong>Three changes actually clear the bar:</strong> a membership that fills practitioner hours, a curanderismo-rooted product line, and reducing or eliminating the studio overhead.</p>
-      <p style="margin: 0;"><strong>The two paths that work best</strong> (E and F on the cashflow page) both involve <em>downsizing the physical studio</em>. The question isn't whether to change the model — it's how much.</p>
-    </div>
+  <h2>Three real choices</h2>
 
-    <div class="stats" style="margin-top: 30px;">
-      <div class="stat">
-        <div class="num">$157.8K</div>
-        <div class="lbl">2024 gross sales</div>
-      </div>
-      <div class="stat">
-        <div class="num">$157.9K</div>
-        <div class="lbl">2025 gross sales · <em style="font-style: italic;">flat YoY</em></div>
-      </div>
-      <div class="stat">
-        <div class="num">~$190K</div>
-        <div class="lbl">2026 annualized · inflection</div>
-      </div>
-      <div class="stat">
-        <div class="num">$25K</div>
-        <div class="lbl">Status-quo take-home · target: $150K</div>
+  <div class="paths">
+
+    <div class="p-block">
+      <div class="p-num">1</div>
+      <div class="p-body">
+        <div class="p-name">Stay the course</div>
+        <p class="p-what">Keep everything as it is. Studio. Practitioners. Your current hours. Nothing changes.</p>
+        <span class="p-tag no">Move not possible</span>
       </div>
     </div>
-    <p style="font-size: 0.88rem; color: var(--muted); font-style: italic; text-align: center; margin-top: 8px;">2024–2025 was a plateau. 2026 has Monica picking up hours and the $200/hr rate taking effect, but the gap to viability is still real.</p>
 
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-
-    <h2>Start here</h2>
-    <p>If numbers and matrices stress you out, take the <strong>plain version</strong>. If you want the full picture, the <strong>cashflow page</strong> is the most important read — it compares all seven scenarios side by side and shows which ones actually clear the bar for the move.</p>
-
-    <div class="paths" style="margin-top: 28px;">
-
-      <a class="path recommended" href="for-monica.html" style="border-color: var(--terra);">
-        <div class="path-tag" style="color: var(--terra);">If spreadsheets stress you out — start here</div>
-        <h3>The plain version</h3>
-        <div class="path-sub">Three real paths, no math, in plain English.</div>
-        <p>The honest picture without the matrix. Where we actually are, the three real choices, and what they'd feel like to live. About a 3-minute read.</p>
-        <div class="path-arrow">Open the plain version</div>
-      </a>
-
-      <a class="path" href="cashflow.html">
-        <div class="path-tag">Read this first</div>
-        <h3>Cashflow &amp; goals</h3>
-        <div class="path-sub">Seven scenarios. Which ones actually hit $150K take-home.</div>
-        <p>Real Square data from 2024–2026, the household target broken down, seven versions of the next 12–24 months compared in a scoreboard, year-1 ramp reality, and the queue of assumptions to pressure-test with an advisor.</p>
-        <div class="path-arrow">Open the cashflow scoreboard</div>
-      </a>
-
-      <a class="path" href="targets.html">
-        <div class="path-tag">Play with the numbers</div>
-        <h3>Targets calculator</h3>
-        <div class="path-sub">Interactive matrix + custom calculator</div>
-        <p>How many practitioner hours per week to hit the target — across every combination of Monica's hours, product tier, studio overhead, and membership. Adjust any input live. Quick preset scenarios to jump between.</p>
-        <div class="path-arrow">Open the calculator</div>
-      </a>
-
-      <a class="path" href="membership.html">
-        <div class="path-tag">Lever 01</div>
-        <h3>The Membership</h3>
-        <div class="path-sub">$185/mo · stabilizes near-term cashflow</div>
-        <p>Three versions of a membership compared. Useful as a building block; not enough on its own. Best paired with the product line.</p>
-        <div class="path-arrow">Open the membership analysis</div>
-      </a>
-
-      <a class="path" href="products.html">
-        <div class="path-tag">Lever 02 · the scale lever</div>
-        <h3>The Product Line</h3>
-        <div class="path-sub">Solsticio + cultural boxes + apothecary</div>
-        <p>The unlock in every scenario that works — because it's the only line item that scales without Monica's hours. Architecture, mockups, financials per concept.</p>
-        <div class="path-arrow">Open the product line analysis</div>
-      </a>
-
-      <a class="path" href="solo.html">
-        <div class="path-tag">Lever 03 · the structural option</div>
-        <h3>The Solo Question</h3>
-        <div class="path-sub">Hardest emotionally — cleanest financially</div>
-        <p>The path raised by outside advisors back in February. Cuts the biggest fixed cost (rent), eliminates practitioner management, fits the move abroad cleanly. Real costs too — page is honest about both.</p>
-        <div class="path-arrow">Open the solo path</div>
-      </a>
-
-      <a class="path" href="plan.html">
-        <div class="path-tag">How it sequences</div>
-        <h3>The Plan</h3>
-        <div class="path-sub">A 6-month path, plus next milestones</div>
-        <p>What to do in weeks 1–14 and beyond. Specifically structured so the lease/practitioner question can wait until month 6 — after products have started to generate real data.</p>
-        <div class="path-arrow">Open the plan</div>
-      </a>
-
+    <div class="p-block">
+      <div class="p-num">2</div>
+      <div class="p-body">
+        <div class="p-name">Reshape</div>
+        <p class="p-what">A smaller space, fewer practitioners, you do less bodywork. We start selling beautiful intentional things — candles, copal, ceremony kits — the things already in your practice.</p>
+        <span class="p-tag yes">Move becomes possible</span>
+      </div>
     </div>
-  </div>
-</section>
 
-<footer>
-  <div class="narrow">
-    <p>Draft strategy note · numbers are directional · for advisor review and pressure-testing</p>
+    <div class="p-block">
+      <div class="p-num">3</div>
+      <div class="p-body">
+        <div class="p-name">Release</div>
+        <p class="p-what">Close the studio. You work solo from home or a small rented room. The products do a lot of the work. Brand becomes you.</p>
+        <span class="p-tag yes">Move becomes easiest</span>
+      </div>
+    </div>
+
   </div>
-</footer>
+
+  <h2>What I'm leaning toward</h2>
+  <div class="leaning">
+    <p><strong>Path 2.</strong> Not because the numbers are biggest — path 3 actually has more financial breathing room — but because it keeps what I think you'd grieve losing.</p>
+    <p>A space. One or two practitioners. An identity beyond just you. While still making the move real.</p>
+    <p style="font-size: 0.95rem; color: var(--muted);">You'd know better than me whether a smaller studio is meaningful to you, or whether it'd be holding onto something you've outgrown.</p>
+  </div>
+
+  <h2>What I need from you</h2>
+  <p>Not opinions on contracts or rent. Just your gut, when you have space to sit with them:</p>
+
+  <ul class="gut">
+    <li>Which of the three feels most like the next version of you?</li>
+    <li>What would you grieve in path 2? In path 3?</li>
+    <li>Is your apprenticeship pulling you toward work that needs a studio at all?</li>
+    <li>Does making physical things — candles, kits, ceremony objects — feel right to put your name on?</li>
+    <li>How tired are you?</li>
+  </ul>
+
+  <h2>One more thing</h2>
+  <p>You've been carrying a lot. The honest answer the numbers gave me is: <strong>not as it's currently shaped, no.</strong> But there's more than one way out — and most of them are gentler on you, not harder.</p>
+  <p>None of this has to be decided this week.</p>
+
+  <div class="footer">
+    If you ever want the full picture — numbers, scenarios, math — <a href="cashflow.html">it's here</a>.
+  </div>
+
+</div>
 
 </body>
 </html>
